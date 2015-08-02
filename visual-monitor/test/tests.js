@@ -115,7 +115,7 @@ describe('Visual monitor testing', function() {
           // Carousel image
           '#carousel-example-generic .item img'
         ],
-        // screenWidth: selectedCaps == 'chrome' ? [640, 960, 1200] : undefined,
+        screenWidth: selectedCaps == 'chrome' ? [640, 960, 1200] : undefined,
       }, shoovWebdrivercss.processResults)
       .call(done);
   });
