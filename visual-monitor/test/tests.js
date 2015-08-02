@@ -56,7 +56,7 @@ describe('Visual monitor testing', function() {
     shoovWebdrivercss.after(done);
   });
 
-  it('should show the home page',function(done) {
+  it('should show the static home page',function(done) {
     client
       .url(baseUrl)
       .webdrivercss(testName + '.homepage', {
@@ -82,5 +82,43 @@ describe('Visual monitor testing', function() {
         }, shoovWebdrivercss.processResults)
         .call(done);
     });
-  }
+  };
+
+
+  it('should show the dynamic home page',function(done) {
+    client
+      .url(baseUrl + '/dynamic-page')
+      .webdrivercss(testName + '.dynamic-homepage', {
+        name: '1',
+        exclude: [
+          // Clock
+          '#flip-clock .flip',
+        ],
+        remove: [
+          // Lorem Ipsum text.
+          '#dynamic-content .lorem-ipsum',
+
+          // The carousel's indicator may change from screenshot to another
+          // so it's better to remove it.
+          '.carousel-indicators li',
+
+          // Carousel caption.
+          '.carousel-caption h3',
+
+          // Hide the navbar on IE, as it's fixed.
+          selectedCaps == 'ie11' ? '.navbar-fixed-top' : '',
+        ],
+        hide: [
+          // Since the clock is flipping, we want to make sure nothing gets out
+          // of the frame, but keep the space.
+          '#flip-clock .flip',
+          // Carousel image
+          '#carousel-example-generic .item img'
+        ],
+        screenWidth: selectedCaps == 'chrome' ? [640, 960, 1200] : undefined,
+      }, shoovWebdrivercss.processResults)
+      .call(done);
+  });
+
+
 });
