@@ -123,6 +123,7 @@ describe('Visual monitor testing', function() {
   it('should show the stopped clock in the dynamic page',function(done) {
     client
       .url(baseUrl + '/dynamic-page')
+      // Stop clock http://flipclockjs.com
       .execute(function() {
         jQuery('#flip-clock').FlipClock().stop();
       })
