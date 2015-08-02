@@ -64,10 +64,23 @@ describe('Visual monitor testing', function() {
         exclude: [],
         remove: [
           // Hide the navbar on IE, as it's fixed.
-          selectedCaps == 'ie11' ? 'navbar-fixed-top' : '',
+          selectedCaps == 'ie11' ? '.navbar-fixed-top' : '',
         ],
         screenWidth: selectedCaps == 'chrome' ? [640, 960, 1200] : undefined,
       }, shoovWebdrivercss.processResults)
       .call(done);
   });
+
+  if (selectedCaps == 'ie11') {
+
+    it('should show the fixed navbar element',function(done) {
+      client
+        .url(baseUrl)
+        .webdrivercss(testName + '.navbar', {
+          name: '1',
+          elem: '.navbar-fixed-top'
+        }, shoovWebdrivercss.processResults)
+        .call(done);
+    });
+  }
 });
