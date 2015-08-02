@@ -120,5 +120,36 @@ describe('Visual monitor testing', function() {
       .call(done);
   });
 
+  it('should show the stopped clock in the dynamic page',function(done) {
+    client
+      .url(baseUrl + '/dynamic-page')
+      .execute(function() {
+        jQuery('#flip-clock').FlipClock().stop();
+      })
+      .webdrivercss(testName + '.clock', {
+        name: '1',
+        elem: '#flip-clock',
+        screenWidth: selectedCaps == 'chrome' ? [640, 960, 1200] : undefined,
+      }, shoovWebdrivercss.processResults)
+      .call(done);
+  });
+
+  it('should show the modal dialog - (chrome only)',function(done) {
+    client
+      .url(baseUrl)
+      .click('.portfolio-link')
+      .webdrivercss(testName + '.modal', {
+        name: '1',
+        remove: [
+          // Remove the sections from the parent window, so the modal height
+          // will be according to its own content.
+          'section'
+        ],
+        screenWidth: selectedCaps == 'chrome' ? [640, 960, 1200] : undefined
+      }, shoovWebdrivercss.processResults)
+      .call(done);
+  });
+
+
 
 });
