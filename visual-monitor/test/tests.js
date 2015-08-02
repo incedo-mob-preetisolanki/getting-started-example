@@ -62,7 +62,10 @@ describe('Visual monitor testing', function() {
       .webdrivercss(testName + '.homepage', {
         name: '1',
         exclude: [],
-        remove: [],
+        remove: [
+          // Hide the navbar on IE, as it's fixed.
+          selectedCaps == 'ie11' ? 'navbar-fixed-top' : '',
+        ],
         screenWidth: selectedCaps == 'chrome' ? [640, 960, 1200] : undefined,
       }, shoovWebdrivercss.processResults)
       .call(done);
