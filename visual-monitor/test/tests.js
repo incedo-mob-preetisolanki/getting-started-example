@@ -41,6 +41,8 @@ var caps = selectedCaps ? capsConfig[selectedCaps] : undefined;
 var providerPrefix = process.env.PROVIDER_PREFIX ? process.env.PROVIDER_PREFIX + '-' : '';
 var testName = selectedCaps ? providerPrefix + selectedCaps : providerPrefix + 'default';
 
+var resultsCallback = process.env.DEBUG ? console.log : shoovWebdrivercss.processResults;
+
 var baseUrl = process.env.BASE_URL ? process.env.BASE_URL : 'http://pages.shoov.io';
 
 describe('Visual monitor testing', function() {
@@ -67,7 +69,7 @@ describe('Visual monitor testing', function() {
           selectedCaps == 'ie11' ? '.navbar-fixed-top' : '',
         ],
         screenWidth: selectedCaps == 'chrome' ? [640, 960, 1200] : undefined,
-      }, shoovWebdrivercss.processResults)
+      }, resultsCallback)
       .call(done);
   });
 
@@ -79,7 +81,7 @@ describe('Visual monitor testing', function() {
         .webdrivercss(testName + '.navbar', {
           name: '1',
           elem: '.navbar-fixed-top'
-        }, shoovWebdrivercss.processResults)
+        }, resultsCallback)
         .call(done);
     });
   };
@@ -116,7 +118,7 @@ describe('Visual monitor testing', function() {
           '#carousel-example-generic .item img'
         ],
         screenWidth: selectedCaps == 'chrome' ? [640, 960, 1200] : undefined,
-      }, shoovWebdrivercss.processResults)
+      }, resultsCallback)
       .call(done);
   });
 
@@ -131,7 +133,7 @@ describe('Visual monitor testing', function() {
         name: '1',
         elem: '#flip-clock',
         screenWidth: selectedCaps == 'chrome' ? [640, 960, 1200] : undefined,
-      }, shoovWebdrivercss.processResults)
+      }, resultsCallback)
       .call(done);
   });
 
@@ -149,7 +151,7 @@ describe('Visual monitor testing', function() {
             'section'
           ],
           screenWidth: selectedCaps == 'chrome' ? [640, 960, 1200] : undefined
-        }, shoovWebdrivercss.processResults)
+        }, resultsCallback)
         .call(done);
     });
 
